@@ -9,28 +9,6 @@
 - Go バイナリ `footcd`: 履歴の選択、保存、初期化コード出力を行う
 - シェル関数 `cd`: `footcd init bash` などの出力を `eval` して定義する
 
-## ビルド
-
-```bash
-make build
-```
-
-主要 OS / ARCH 向けのクロスビルド:
-
-```bash
-make cross
-```
-
-出力先:
-
-- `footcd`
-- `dist/footcd-linux-amd64`
-- `dist/footcd-linux-arm64`
-- `dist/footcd-darwin-amd64`
-- `dist/footcd-darwin-arm64`
-- `dist/footcd-windows-amd64.exe`
-- `dist/footcd-windows-arm64.exe`
-
 ## Bash / Zsh への組み込み
 
 ```bash
