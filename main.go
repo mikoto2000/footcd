@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"errors"
 	"flag"
 	"fmt"
@@ -111,42 +110,6 @@ func resolveExistingDir(arg string) (string, error) {
 	}
 
 	return target, nil
-}
-
-func chooseFromHistory(historyFile string, stderr io.Writer) (string, error) {
-	entries, err := readHistory(historyFile)
-	if err != nil {
-		return "", err
-	}
-	if len(entries) == 0 {
-		return "", fmt.Errorf("cd history is empty")
-	}
-
-	fmt.Fprintln(stderr, "Select a directory:")
-	for i, entry := range entries {
-		fmt.Fprintf(stderr, "  %d) %s\n", i+1, entry)
-	}
-	fmt.Fprint(stderr, "> ")
-
-	reader := bufio.NewReader(os.Stdin)
-	line, err := reader.ReadString('\n')
-	if err != nil && !errors.Is(err, io.EOF) {
-		return "", fmt.Errorf("read selection: %w", err)
-	}
-	line = strings.TrimSpace(line)
-	if line == "" {
-		return "", errAborted
-	}
-
-	index, err := strconv.Atoi(line)
-	if err != nil {
-		return "", fmt.Errorf("invalid selection %q", line)
-	}
-	if index < 1 || index > len(entries) {
-		return "", fmt.Errorf("selection out of range: %d", index)
-	}
-
-	return entries[index-1], nil
 }
 
 func resolveHistoryFile(flagValue string) (string, error) {
