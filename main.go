@@ -131,11 +131,11 @@ func resolveHistoryFile(flagValue string) (string, error) {
 		return filepath.Abs(envValue)
 	}
 
-	configDir, err := os.UserConfigDir()
+	cacheDir, err := os.UserCacheDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(configDir, "footcd", "history"), nil
+	return filepath.Join(cacheDir, "footcd", "history"), nil
 }
 
 func normalizeArgs(args []string) []string {

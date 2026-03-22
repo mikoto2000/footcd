@@ -78,7 +78,7 @@ footcd --version
 
 ## 履歴
 
-- デフォルト保存先: `$XDG_CONFIG_HOME/footcd/history` または `~/.config/footcd/history`
+- デフォルト保存先: `$XDG_CACHE_HOME/footcd/history` または `~/.cache/footcd/history`
 - 環境変数 `FOOTCD_HISTORY_FILE` で変更可能
 - 環境変数 `FOOTCD_HISTORY_LIMIT` で件数上限を変更可能
 
