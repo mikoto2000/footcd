@@ -3,7 +3,7 @@ DIST_DIR := build
 GO ?= go
 GOCACHE ?= /tmp/go-build
 VERSION := 1.0.0
-LDFLAGS := -X main.version=$(VERSION)
+LDFLAGS := -s -w -X main.version=$(VERSION)
 
 TARGETS := \
 	linux/amd64 \
