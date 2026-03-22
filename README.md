@@ -62,3 +62,7 @@ footcd init bash
 - 環境変数 `FOOTCD_HISTORY_LIMIT` で件数上限を変更可能
 
 履歴には実際に移動した絶対パスだけを保存し、存在しなくなったディレクトリは候補から除外します。
+
+## License
+
+MIT License. See [LICENSE](./LICENSE).
