@@ -17,19 +17,30 @@ const (
 	envHistoryLimit     = "FOOTCD_HISTORY_LIMIT"
 )
 
+var version = "dev"
+
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdout, os.Stderr))
 }
 
 func run(args []string, stdout, stderr io.Writer) int {
+	args = normalizeArgs(args)
+
 	fs := flag.NewFlagSet("footcd", flag.ContinueOnError)
 	fs.SetOutput(stderr)
 
 	historyFileFlag := fs.String("history-file", "", "history file path")
 	limitFlag := fs.Int("history-limit", historyLimit(), "maximum history entries to keep")
+	versionFlag := fs.Bool("version", false, "show version")
+	versionShortFlag := fs.Bool("v", false, "show version")
 
 	if err := fs.Parse(args); err != nil {
 		return 2
+	}
+
+	if *versionFlag || *versionShortFlag {
+		fmt.Fprintln(stdout, version)
+		return 0
 	}
 
 	rest := fs.Args()
@@ -125,6 +136,18 @@ func resolveHistoryFile(flagValue string) (string, error) {
 		return "", err
 	}
 	return filepath.Join(configDir, "footcd", "history"), nil
+}
+
+func normalizeArgs(args []string) []string {
+	out := make([]string, 0, len(args))
+	for _, arg := range args {
+		if arg == "--version" {
+			out = append(out, "-version")
+			continue
+		}
+		out = append(out, arg)
+	}
+	return out
 }
 
 func initScript(shell, cmdName string) (string, error) {

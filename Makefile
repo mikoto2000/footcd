@@ -2,6 +2,8 @@ APP := footcd
 DIST_DIR := build
 GO ?= go
 GOCACHE ?= /tmp/go-build
+VERSION := 1.0.0
+LDFLAGS := -X main.version=$(VERSION)
 
 TARGETS := \
 	linux/amd64 \
@@ -13,7 +15,7 @@ TARGETS := \
 
 .PHONY: build
 build:
-	GOCACHE=$(GOCACHE) $(GO) build -o $(DIST_DIR)/$(APP) .
+	GOCACHE=$(GOCACHE) $(GO) build -ldflags "$(LDFLAGS)" -o $(DIST_DIR)/$(APP) .
 
 .PHONY: cross
 cross: $(TARGETS:%=$(DIST_DIR)/%)
@@ -26,7 +28,7 @@ $(DIST_DIR)/%:
 	if [ "$$os" = "windows" ]; then ext='.exe'; fi; \
 	out='$(DIST_DIR)/$(APP)-'$$os'-'$$arch"$$ext"; \
 	echo "building $$out"; \
-	GOCACHE=$(GOCACHE) GOOS="$$os" GOARCH="$$arch" $(GO) build -o "$$out" .
+	GOCACHE=$(GOCACHE) GOOS="$$os" GOARCH="$$arch" $(GO) build -ldflags "$(LDFLAGS)" -o "$$out" .
 
 .PHONY: clean
 clean:

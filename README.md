@@ -9,6 +9,20 @@
 - Go バイナリ `footcd`: 履歴の選択、保存、初期化コード出力を行う
 - シェル関数 `cd`: `footcd init bash` などの出力を `eval` して定義する
 
+## ビルド
+
+```bash
+make build
+```
+
+主要 OS / ARCH 向けのクロスビルド:
+
+```bash
+make cross
+```
+
+バージョンは [Makefile](/workspaces/footprinted-cd/Makefile) の `VERSION` 定数で管理します。
+
 ## Bash / Zsh への組み込み
 
 ```bash
@@ -53,6 +67,13 @@ Unix 系環境では、以下の対話操作が使えます。
 
 ```bash
 footcd init bash
+```
+
+バージョン確認:
+
+```bash
+footcd -v
+footcd --version
 ```
 
 ## 履歴
