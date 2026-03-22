@@ -1,0 +1,13 @@
+{
+  "name": "devcontainer.vim",
+  "build": {
+    "dockerfile": "Dockerfile",
+  },
+  "remoteUser": "vscode",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    }
+  }
+}
+
